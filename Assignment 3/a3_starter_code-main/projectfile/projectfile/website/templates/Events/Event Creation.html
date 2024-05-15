@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Event Masters</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="Static/style/Style.css" rel="stylesheet">
+  </head>
+  <body class="background">
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark background">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html">EventMasters</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="Event Details.html">Events</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="Event Creation.html">Create Event</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="Booking.html">Bookings</a>
+              </li>
+            </ul>
+            <form class="d-flex">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button class="btn btn-outline-success" type="submit">
+                Search
+              </button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+      <div id="carouselExampleDark" class="carousel carousel-dark slide">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="10000">
+            <a href="Event Details.html">
+            <img src="Static/Img/BTS.jpg" class="d-block w-100" alt="...">
+            </a>
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Upcoming Events</h5>
+              <p>Watch BTS Preform Live</p>
+            </div>
+          </div>
+          <div class="carousel-item" data-bs-interval="2000">
+            <a href="Event Details.html">
+            <img src="Static/Img/Olivia rodrigo.jpg" class="d-block w-100" alt="...">
+            </a>
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Upcoming Events</h5>
+              <p>Watch Oliva Rodrigo Preform Live</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <a href="Event Details.html">
+            <img src="Static/Img/Zayn malik.png" class="d-block w-100" alt="...">
+            </a>
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Upcoming Events</h5>
+              <p>Watch Zayn Malik preform Live</p>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </header>
+
+<main class="rowimg">
+    <div class="container text-center">
+        <div class="row updates image" >
+          <div class="col-md-6">
+            <label for="exampleFormControlInput1" class="form-label">Artist</label>
+            <input type="Name" class="form-control" id="exampleFormControlInput1">
+          </div>
+          <div class="col-md-6">
+            <label for="exampleFormControlInput1" class="form-label">Date</label>
+            <input type="datetime" class="form-control" id="exampleFormControlInput1">
+          </div>
+        </div>
+
+        <div class="row rowimg">
+          <div class="col-md-6">
+            <input type="time" id="appt" name="appt" min="09:00" max="18:00" class="input">
+            <small class="categorytext">Start time</small>
+          </div>
+          <div class="col-md-6">
+            <input type="time" id="appt" name="appt" min="09:00" max="18:00" class="input">
+            <small class="categorytext">Finish time</small>
+          </div>
+        </div>
+        
+        <div class="row createimg">
+          <div class="col-md-6">
+            <img src="Static/Img/image.jpg" class="img2">
+          </div>
+          <div class="col-md-6">
+            <label for="formFileSm" class="form-label" class="categorytext">Event Image</label>
+            <input class="form-control form-control-sm" id="formFileSm" type="file" class="filess">
+          </div>
+        </div>
+        
+        <div class="row">
+            <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label text-white">Description</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="row">  
+            <div class="mb-3"></div>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Create Event
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Event Created</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Congratulation on the Event has been created. 
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</main>
+<footer class="foot">
+<small>© Copyright 2024, n11822228 Tung Pham</small>
+</footer>
+</body>
+</html>
