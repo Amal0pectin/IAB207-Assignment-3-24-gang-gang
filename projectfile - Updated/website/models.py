@@ -3,7 +3,7 @@ from datetime import datetime
 from flask_login import UserMixin
 
 class User(db.Model, UserMixin):
-    __tablename = 'users'
+    __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(100), index=True, unique=True, nullable=False)
     emailid = db.Column(db.String(100), index=True, nullable=False)
@@ -23,7 +23,7 @@ class Event(db.Model):
     eventdatetime = db.Column(db.DateTime)
     # ... Create the Comments db.relationship
 	# relation to call destination.comments and comment.destination
-    comments = db.relationship('Comment', backref='destination')
+    comments = db.relationship('Comment', backref='event')
     
     # string print method
     def __repr__(self):
@@ -36,7 +36,7 @@ class Comment(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.now())
     # add the foreign keys
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    destination_id = db.Column(db.Integer, db.ForeignKey('destinations.id'))
+    destination_id = db.Column(db.Integer, db.ForeignKey('Event.id'))
 
     # string print method
     def __repr__(self):
