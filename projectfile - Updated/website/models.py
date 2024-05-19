@@ -36,7 +36,7 @@ class Comment(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.now())
     # add the foreign keys
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    destination_id = db.Column(db.Integer, db.ForeignKey('Event.id'))
+    Event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
 
     # string print method
     def __repr__(self):
@@ -50,4 +50,3 @@ class Order(db.Model):
     image = db.Column(db.String(400))
     eventdatetime = db.Column(db.DateTime)
     booked_at = db.Column(db.DateTime, default=datetime.now())
-    
