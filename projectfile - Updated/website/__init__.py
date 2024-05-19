@@ -1,8 +1,11 @@
 #import flask - from the package import class
-from flask import Flask 
+from flask import Flask, render_template
 from flask_bootstrap import Bootstrap5
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from flask_bcrypt import Bcrypt
+import datetime
+
 
 db = SQLAlchemy()
 
@@ -20,28 +23,39 @@ def create_app():
     db.init_app(app)
 
     Bootstrap5(app)
+
+    UPLOAD_FOLDER = '/Static/Img'
+    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     
     #initialize the login manager
-    #login_manager = LoginManager()
+    login_manager = LoginManager()
     
     # set the name of the login function that lets user login
     # in our case it is auth.login (blueprintname.viewfunction name)
-    #login_manager.login_view = 'auth.login'
-    #login_manager.init_app(app)
+    login_manager.login_view = 'auth.login'
+    login_manager.init_app(app)
 
     # create a user loader function takes userid and returns User
     # Importing inside the create_app function avoids circular references
-    #from .models import User
-    #@login_manager.user_loader
-    #def load_user(user_id):
-       #return User.query.get(int(user_id))
+    from .models import User
+    @login_manager.user_loader
+    def load_user(user_id):
+       return User.query.get(int(user_id))
 
     #importing views module here to avoid circular references
     # a commonly used practice.
     from . import views
     app.register_blueprint(views.main_bp)
 
+    from . import events
+    app.register_blueprint(events.event_bp)
+
     from . import auth
     app.register_blueprint(auth.auth_bp)
+
+    @app.context_processor
+    def get_context():
+        year = datetime.datetime.today().year
+        return dict(year=year)
     
     return app
