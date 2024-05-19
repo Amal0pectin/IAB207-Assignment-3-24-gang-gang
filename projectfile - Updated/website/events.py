@@ -1,36 +1,38 @@
-from flask import Blueprint, render_template, request, redirect, url_for
-from travel.model import Destination, Comment
-from .forms import DestinationForm, CommentForm
+from flask import Blueprint, render_template, request, redirect, url_for, flash, abort
+from .models import Event, Comment
+from .forms import EventForm, CommentForm
 from . import db
 import os
 from werkzeug.utils import secure_filename
+#from flask import login_required
 
-destbp = Blueprint('events', __name__, url_prefix="/events")
+event_bp = Blueprint('Event', __name__, url_prefix="/Events")
 
-@destbp.route('/<id>')
+@event_bp.route('/<id>')
 def detials(id):
     # eventually we will query the database table 'destinations'for this id
     ## and get back all relevant information for that destination
     event = db.session.scalar(db.select(Event).where(Event.id==id))
-    cform = CommentForm()
-    return render_template('events/Event Detials.html', destination = destination, form=cform)
+    form = CommentForm()
+    if not event:
+       abort(404)
+    return render_template('Events/details.html', event = event, form=form)
 
-@destbp.route('/create', methods = ['GET', 'POST'])
+@event_bp.route('/create', methods = ['GET', 'POST'])
+#@login_required
 def create():
   print('Method type: ', request.method)
   form = EventForm()
   if form.validate_on_submit():
     # call the function that checks and returns image
     db_file_path = check_upload_file(form)
-    event = Event(name=form.name.data,
-                               description=form.description.data,
-                               image=db_file_path,
-                               start_time=form.star_time.data,
-                               end_time=form.end_time.data)
+    event = Event(name=form.name.data, description=form.description.data, 
+    image=db_file_path, start_time=form.star_time.data, end_time=form.end_time.data)
     # add the object to the db session
-    db.session.add(events)
+    db.session.add(event)
     # commit to the database
     db.session.commit()
+    flash('Successfully created new Event', 'success')
     return redirect(url_for('event.create'))
   return render_template('events/create.html', form=form)
 
@@ -42,14 +44,15 @@ def check_upload_file(form):
   # get the current path of the module file… store image file relative to this path  
   BASE_PATH = os.path.dirname(__file__)
   # upload file location – directory of this file/static/image
-  upload_path = os.path.join(BASE_PATH,'static/image',secure_filename(filename))
+  upload_path = os.path.join(BASE_PATH,'Static/img',secure_filename(filename))
   # store relative path in DB as image location in HTML is relative
-  db_upload_path = '/static/image/' + secure_filename(filename)
+  db_upload_path = '/Static/img/' + secure_filename(filename)
   # save the file and return the db upload path  
   fp.save(upload_path)
   return db_upload_path
 
-@destbp.route('/<id>/comment', methods=['GET', 'POST'])  
+@event_bp.route('/<id>/comment', methods=['GET', 'POST'])  
+#@login_required
 def comment(id):  
     form = CommentForm()  
     # get the destination object associated to the page and the comment
@@ -57,15 +60,15 @@ def comment(id):
     if form.validate_on_submit():  
       # read the comment from the form, associate the Comment's destination field
       # with the destination object from the above DB query
-      comment = Comment(text=form.text.data, destination=destination) 
+      comment = Comment(text=form.text.data, event = event) 
       # here the back-referencing works - comment.destination is set
       # and the link is created
       db.session.add(comment) 
       db.session.commit() 
       # flashing a message which needs to be handled by the html
       # flash('Your comment has been added', 'success')  
-      print('Your comment has been added', 'success') 
+      flash ('Your comment has been added', 'success') 
     # using redirect sends a GET request to destination.show
-    return redirect(url_for('destination.show', id=id))
+    return redirect(url_for('Events.details', id=id))
 
 
