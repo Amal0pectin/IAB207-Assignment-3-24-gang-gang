@@ -1,8 +1,11 @@
 from flask_wtf import FlaskForm
-from wtforms.fields import TextAreaField,SubmitField, StringField, PasswordField
-from wtforms.validators import InputRequired, Length, Email, EqualTo
+from wtforms.fields import TextAreaField, SubmitField, StringField, PasswordField, TimeField
+from wtforms.validators import InputRequired, Email, EqualTo
+from flask_wtf.file import FileRequired, FileField, FileAllowed
 
-# Create new destination
+ALLOWED_FILE = {'PNG', 'JPG', 'JPEG', 'png', 'jpg', 'jpeg'}
+
+# Create new Event
 class EventForm(FlaskForm):
   name = StringField('Artist', validators=[InputRequired()])
   description = TextAreaField('Description', 
@@ -10,8 +13,8 @@ class EventForm(FlaskForm):
   image = FileField('Event Image', validators=[
     FileRequired(message = 'Image cannot be empty'),
     FileAllowed(ALLOWED_FILE, message='Only supports png, jpg, JPG, PNG')])
-  star_time = DateField('Start Time', validators=[InputRequired()], format='%d-%m-%Y %H:%M')
-  end_time = DataField('Start Time', validators=[InputRequired()], format='%d-%m-%Y %H:%M')
+  star_time = TimeField('Start Time', validators=[InputRequired()], format='%d-%m-%Y %H:%M')
+  end_time = TimeField('Start Time', validators=[InputRequired()], format='%d-%m-%Y %H:%M')
   submit = SubmitField("Create")
 
 #creates the login information
