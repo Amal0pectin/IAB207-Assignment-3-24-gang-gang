@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms.fields import TextAreaField, SubmitField, StringField, PasswordField, TimeField
+from wtforms.fields import TextAreaField, SubmitField, StringField, PasswordField, DateTimeLocalField
 from wtforms.validators import InputRequired, Email, EqualTo
 from flask_wtf.file import FileRequired, FileField, FileAllowed
 
@@ -13,8 +13,8 @@ class EventForm(FlaskForm):
   image = FileField('Event Image', validators=[
     FileRequired(message = 'Image cannot be empty'),
     FileAllowed(ALLOWED_FILE, message='Only supports png, jpg, JPG, PNG')])
-  star_time = TimeField('Start Time', validators=[InputRequired()], format='%d-%m-%Y %H:%M')
-  end_time = TimeField('Start Time', validators=[InputRequired()], format='%d-%m-%Y %H:%M')
+  star_time = DateTimeLocalField('Start Time', validators=[InputRequired()])
+  end_time = DateTimeLocalField('End Time', validators=[InputRequired()])
   submit = SubmitField("Create")
 
 #creates the login information

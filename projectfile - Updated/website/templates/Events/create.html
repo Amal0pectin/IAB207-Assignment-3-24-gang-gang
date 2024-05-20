@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
  
+{% from 'bootstrap5/form.html' import render_form %}
+
 {% block header %}
       <div id="carouselExampleDark" class="carousel carousel-dark slide">
         <div class="carousel-indicators">
@@ -51,70 +53,12 @@
 <main class="rowimg">
     <div class="container text-center">
         <div class="row updates image" >
-          <div class="col-md-6">
-            <label for="exampleFormControlInput1" class="form-label">Artist</label>
-            <input type="Name" class="form-control" id="exampleFormControlInput1">
-          </div>
-          <div class="col-md-6">
-            <label for="exampleFormControlInput1" class="form-label">Date</label>
-            <input type="datetime" class="form-control" id="exampleFormControlInput1">
+          <div class="col-md-12">
+            <h1> Create New Event</h1>
+            <p1> Fill out the detials of your upcoming event </p1>
+            {{ render_form(form) }}
           </div>
         </div>
-
-        <div class="row rowimg">
-          <div class="col-md-6">
-            <input type="time" id="appt" name="appt" min="09:00" max="18:00" class="input">
-            <small class="categorytext">Start time</small>
-          </div>
-          <div class="col-md-6">
-            <input type="time" id="appt" name="appt" min="09:00" max="18:00" class="input">
-            <small class="categorytext">Finish time</small>
-          </div>
-        </div>
-        
-        <div class="row createimg">
-          <div class="col-md-6">
-            <img src="Static/Img/image.jpg" class="img2">
-          </div>
-          <div class="col-md-6">
-            <label for="formFileSm" class="form-label" class="categorytext">Event Image</label>
-            <input class="form-control form-control-sm" id="formFileSm" type="file" class="filess">
-          </div>
-        </div>
-        
-        <div class="row">
-            <div class="mb-3">
-              <label for="exampleFormControlTextarea1" class="form-label text-white">Description</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-          </div>
-          <div class="row">  
-            <div class="mb-3"></div>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-              Create Event
-            </button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Event Created</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    Congratulation on the Event has been created. 
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 </main>
 {%endblock%}

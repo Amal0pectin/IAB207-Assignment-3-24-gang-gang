@@ -33,8 +33,8 @@ def create():
     # commit to the database
     db.session.commit()
     flash('Successfully created new Event', 'success')
-    return redirect(url_for('event.create'))
-  return render_template('events/create.html', form=form)
+    return redirect(url_for('Event.create'))
+  return render_template('Events/create.html', form=form)
 
 
 def check_upload_file(form):
