@@ -15,6 +15,7 @@ class EventForm(FlaskForm):
     FileAllowed(ALLOWED_FILE, message='Only supports png, jpg, JPG, PNG')])
   star_time = DateTimeLocalField('Start Time', validators=[InputRequired()])
   end_time = DateTimeLocalField('End Time', validators=[InputRequired()])
+  location = StringField('Event Location', validators=[InputRequired()])
   submit = SubmitField("Create")
 
 #creates the login information
