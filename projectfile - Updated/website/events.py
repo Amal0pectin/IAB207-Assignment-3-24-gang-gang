@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, abort
-from .models import Event, Comment
+from .models import Event, Comment, User
 from .forms import EventForm, CommentForm
 from . import db
 import os
@@ -9,7 +9,7 @@ from werkzeug.utils import secure_filename
 event_bp = Blueprint('Event', __name__, url_prefix="/Events")
 
 @event_bp.route('/<id>')
-def detials(id):
+def details(id):
     # eventually we will query the database table 'destinations'for this id
     ## and get back all relevant information for that destination
     event = db.session.scalar(db.select(Event).where(Event.id==id))
@@ -27,7 +27,8 @@ def create():
     # call the function that checks and returns image
     db_file_path = check_upload_file(form)
     event = Event(name=form.name.data, description=form.description.data, 
-    image=db_file_path, start_time=form.star_time.data, end_time=form.end_time.data)
+    image=db_file_path, start_time=form.star_time.data, end_time=form.end_time.data,
+    location=form.locations.data, genre=form.genres.data)
     # add the object to the db session
     db.session.add(event)
     # commit to the database
@@ -51,6 +52,7 @@ def check_upload_file(form):
   fp.save(upload_path)
   return db_upload_path
 
+
 @event_bp.route('/<id>/comment', methods=['GET', 'POST'])  
 #@login_required
 def comment(id):  
@@ -70,5 +72,3 @@ def comment(id):
       flash ('Your comment has been added', 'success') 
     # using redirect sends a GET request to destination.show
     return redirect(url_for('Events.details', id=id))
-
-

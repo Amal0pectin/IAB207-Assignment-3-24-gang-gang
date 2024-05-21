@@ -16,7 +16,11 @@ class EventForm(FlaskForm):
   star_time = DateTimeLocalField('Start Time', validators=[InputRequired()])
   end_time = DateTimeLocalField('End Time', validators=[InputRequired()])
   location = StringField('Event Location', validators=[InputRequired()])
+  genre = StringField('Genre', validators=[InputRequired()])
   submit = SubmitField("Create")
+
+# Bookings
+
 
 #creates the login information
 class LoginForm(FlaskForm):

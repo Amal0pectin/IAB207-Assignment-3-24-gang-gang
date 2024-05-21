@@ -53,6 +53,9 @@ def create_app():
     from . import auth
     app.register_blueprint(auth.auth_bp)
 
+    from . import booking
+    app.register_blueprint(booking.book_bp)
+
     @app.context_processor
     def get_context():
         year = datetime.datetime.today().year

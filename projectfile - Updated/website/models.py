@@ -4,10 +4,11 @@ from flask_login import UserMixin
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
-    id = db.Column(db.Integer, primary_key = True)
+    id = db.Column(db.Integer, primary_key = True, unique=True)
     name = db.Column(db.String(100), index=True, unique=True, nullable=False)
     emailid = db.Column(db.String(100), index=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
+    Event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
     comments = db.relationship('Comment', backref='user')
 
     # string print method
@@ -22,6 +23,8 @@ class Event(db.Model):
     image = db.Column(db.String(400))
     start_time = db.Column(db.DateTime)
     end_time = db.Column(db.DateTime)
+    location = db.Column(db.String(80))
+    genre = db.Column(db.String(10))
     # ... Create the Comments db.relationship
 	# relation to call destination.comments and comment.destination
     comments = db.relationship('Comment', backref='event')
