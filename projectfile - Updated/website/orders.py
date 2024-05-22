@@ -6,14 +6,14 @@ import os
 from werkzeug.utils import secure_filename
 #from flask import login_required
 
-book_bp = Blueprint('Bookings', __name__, url_prefix="/Booking")
+order_bp = Blueprint('Order', __name__, url_prefix="/Order")
 
-@book_bp.route('/<id>')
-def bookings(id):
+@order_bp.route('/<id>')
+def orders(id):
     # eventually we will query the database table 'destinations'for this id
     ## and get back all relevant information for that destination
-    book = db.session.scalar(db.select(User).where(User.id==id))
+    order = db.session.scalar(db.select(order).where(order.id==id))
     form = CommentForm()
-    if not book:
+    if not order:
        abort(404) 
-    return render_template('Bookings.html', book = book, form=form)
+    return render_template('Bookings.html', order = order, form=form)

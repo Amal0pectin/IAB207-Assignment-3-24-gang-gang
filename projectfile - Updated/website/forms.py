@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms.fields import TextAreaField, SubmitField, StringField, PasswordField, DateTimeLocalField
+from wtforms.fields import TextAreaField, SubmitField, StringField, PasswordField, DateTimeLocalField, RadioField
 from wtforms.validators import InputRequired, Email, EqualTo
 from flask_wtf.file import FileRequired, FileField, FileAllowed
 
@@ -21,7 +21,10 @@ class EventForm(FlaskForm):
 
 # Bookings
 
+class BookingForm (FlaskForm):
+   ticket_type = RadioField('Select Ticket', choices=[('Best Available','(any price) From $200'),('A Reserve ','$400'),('B Reserve', '$300'), ('C Reserve', '$200')])
 
+   delivery_type = RadioField('Choose Delivery Option', choices=[('Mobile Ticket (via SMS)','$8.50'),('Print-At-Home (PDF)','$8.50'),('Venue / Pre-Paid Collection Outlet', '$11.50') ])
 #creates the login information
 class LoginForm(FlaskForm):
     user_name=StringField("User Name", validators=[InputRequired('Enter user name')])
@@ -44,3 +47,6 @@ class RegisterForm(FlaskForm):
 class CommentForm(FlaskForm):
   text = TextAreaField('Comment', [InputRequired()])
   submit = SubmitField('Create')
+
+
+

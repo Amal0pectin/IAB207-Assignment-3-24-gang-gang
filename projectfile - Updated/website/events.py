@@ -4,14 +4,12 @@ from .forms import EventForm, CommentForm
 from . import db
 import os
 from werkzeug.utils import secure_filename
-#from flask import login_required
+from flask_login import login_required
 
 event_bp = Blueprint('Event', __name__, url_prefix="/Events")
 
 @event_bp.route('/<id>')
 def details(id):
-    # eventually we will query the database table 'destinations'for this id
-    ## and get back all relevant information for that destination
     event = db.session.scalar(db.select(Event).where(Event.id==id))
     form = CommentForm()
     if not event:
@@ -19,7 +17,7 @@ def details(id):
     return render_template('Events/details.html', event = event, form=form)
 
 @event_bp.route('/create', methods = ['GET', 'POST'])
-#@login_required
+@login_required
 def create():
   print('Method type: ', request.method)
   form = EventForm()
@@ -28,7 +26,7 @@ def create():
     db_file_path = check_upload_file(form)
     event = Event(name=form.name.data, description=form.description.data, 
     image=db_file_path, start_time=form.star_time.data, end_time=form.end_time.data,
-    location=form.locations.data, genre=form.genres.data)
+    location=form.location.data, genre=form.genre.data)
     # add the object to the db session
     db.session.add(event)
     # commit to the database
