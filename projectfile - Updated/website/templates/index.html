@@ -209,11 +209,12 @@
         </div>
 
         <div class="row row-cols-1 row-cols-md-4 g-4 cardset">
+          {% for events in events %}
           <div class="col mb-4">
+            
             <div class="card-group artist">
-              {% for events in events %}
               <img
-                src="{{ events.image }}" alt="Event Image"
+                src="{{url_for('static', filename=events.image)}}" alt="Event Image"
                 class="card-img-top img-fluid"
               />
               <div class="card-body d-flex flex-column justify-content-between">
@@ -227,13 +228,15 @@
                   <p class="card-text">Finish Time: {{ events.end_time}}</p>
                   <p class="card-text">Location: {{ events.location}}</p>
                 </div>
-                <a href="{{ url_for('Events.details', id=events.id) }}" class="btn btn-primary mt-2"
+                <a href="{{ url_for('Event.details', id=events.id) }}" class="btn btn-primary mt-2"
                   >More Details</a
                 >
               </div>
-              {% endfor %}
             </div>
+            
           </div>
+          {% endfor %}
+        </div>
         <h2> Social Buzz </h2>
         <div class="row">
           <div class="col-xl-4 col-lg-5 col-md-6">                
@@ -250,7 +253,7 @@
         <div class="row rowimg">
           <div class="col-md-6">
             <img
-              src="Static/Img/Event.jpg"
+              src="{{url_for('static', filename='Img/Event.jpg')}}"
               class="img-fluid img"
               alt="Event Image"
             />
