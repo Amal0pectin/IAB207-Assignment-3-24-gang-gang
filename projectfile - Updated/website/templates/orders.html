@@ -91,26 +91,26 @@
         <div class="container cardset">
           <div class="row row-cols-1 row-cols-md-4 g-4 cardset">
             
-            {% for orders in order %}
+            {% for order in orders %}
             <div class="col mb-4">
               
               <div class="card-group artist">
                 <img
-                  src="{{url_for('static', filename=events.image)}}" alt="Event Image"
+                  src="{{url_for('static', filename=order.event.image)}}" alt="Event Image"
                   class="card-img-top img-fluid"
                 />
                 <div class="card-body d-flex flex-column justify-content-between">
                   <div>
                     <button type="button" class="btn btn-success">
-                      Available
+                      {{ order.event.status }}
                     </button>
-                    <h5 class="card-title mt-2">{{ events.name }}</h5>
-                    <p class="card-text">{{ events.description }}</p>
-                    <p class="card-text">Start Time: {{ events.start_time }}</p>
-                    <p class="card-text">Finish Time: {{ events.end_time}}</p>
-                    <p class="card-text">Location: {{ events.location}}</p>
+                    <h4 class="card-title mt-2">Event Name: {{ order.event.name }}</h4>
+                    <h5 class="card-title mt-2">Order ID: {{ order.id }}</h5>
+                    <p class="card-text">Num tickets booked: {{ order.ticketsbooked }}</p>
+                    <p class="card-text">Booked at: {{ order.booked_at }}</p>
+                    
                   </div>
-                  <a href="{{ url_for('Event.details', id=events.id) }}" class="btn btn-primary mt-2"
+                  <a href="{{ url_for('Event.details', id=order.Event_id) }}" class="btn btn-primary mt-2"
                     >More Details</a
                   >
                 </div>
