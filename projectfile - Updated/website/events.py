@@ -71,3 +71,4 @@ def comment(id):
     # using redirect sends a GET request to destination.show
     return redirect(url_for('Events.details', id=id))
 
+
