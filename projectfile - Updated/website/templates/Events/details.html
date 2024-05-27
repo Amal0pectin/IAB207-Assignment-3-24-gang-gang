@@ -92,11 +92,11 @@
         <div class="container py-3 updates">
           <div class="row justify-content-between">
             <div class="col-md-3">
-              <h1 class="mb-0">New Jeans World Tour</h1>
+              <h1 class="mb-0">{{event.name}}</h1>
             </div>
             <div class="col-md-6">
               <img
-                src="Static/Img/New jeans.jpg"
+                src="{{url_for('static', filename=event.image)}}"
                 class="img-fluid"
                 alt="New Jeans"
               />
@@ -120,16 +120,10 @@
           <div class="col-md-5 categorytext emailins">
             <h2>Event Details</h2>
             <p>Presented by: EventMasters</p>
-            <p>
-              Famous Kpop Group NewJeans brings the NewJeans 2nd EP Get Up to
-              Australia this June
+            <p> {{event.description}}
             </p>
-            <p>
-              Dont miss NewJeans perform all their album Get Up with tracks
-              including 'Super Shy', 'ETA' and more live in concert
-            </p>
-            <p>Date: 20/06/2024</p>
-            <p>Start: 7:00pm Finsh: 11:00pm</p>
+            <p>Event Starts At : {{event.start_date}}</p>
+            <p>Event Ends At : {{event.end_date}}</p>
           </div>
         </div>
 
@@ -358,119 +352,22 @@
             </div>
           </div>
         </div>
-
-        <h2 class="categorytext">Comments</h2>
         <div class="row">
-          <div class="col-md-3 mb-4">
-            <div class="card artist">
-              <div class="card-body">
-                <h5 class="card-title">OMG</h5>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <p class="card-text cardp">
-                  Attending the NewJeans concert was like diving into a musical
-                  whirlwind! Their performance was a symphony of passion and
-                  talent, blending catchy melodies with raw energy. From the
-                  soulful ballads to the heart-pounding anthems, every moment
-                  was a journey through sound. The atmosphere was electric, and
-                  the crowd's energy was infectious. NewJeans delivered an
-                  unforgettable night of pure musical magic!
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3 mb-4">
-            <div class="card artist">
-              <div class="card-body">
-                <h5 class="card-title">WOW</h5>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <p class="card-text cardp">
-                  The NewJeans concert was a rollercoaster of emotions, with
-                  soaring highs and a minor hiccup. Their performance was
-                  undeniably energetic and captivating, drawing the audience
-                  into a musical frenzy. However, amidst the electrifying
-                  atmosphere, there was a brief sound issue that momentarily
-                  disrupted the experience. Despite this minor setback, NewJeans
-                  quickly recovered and delivered an unforgettable show filled
-                  with passion and talent. A night of highs and one tiny blip,
-                  but overall, an incredible concert experience.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3 mb-4">
-            <div class="card artist">
-              <div class="card-body">
-                <h5 class="card-title">Unbelievable</h5>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <p class="card-text cardp">
-                  Attending the NewJeans concert was like diving into a musical
-                  whirlwind! Their performance was a symphony of passion and
-                  talent, blending catchy melodies with raw energy. From the
-                  soulful ballads to the heart-pounding anthems, every moment
-                  was a journey through sound. The atmosphere was electric, and
-                  the crowd's energy was infectious. NewJeans delivered an
-                  unforgettable night of pure musical magic!
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3 mb-4">
-            <div class="card artist">
-              <div class="card-body">
-                <h5 class="card-title">Insane</h5>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <p class="card-text cardp">
-                  NewJeans concert was an electrifying experience! With
-                  pulsating beats and mesmerizing vocals, they had the crowd on
-                  their feet from start to finish. The seamless fusion of genres
-                  kept the energy high, leaving us wanting more. A night to
-                  remember, filled with unforgettable moments and killer tunes.
-                  NewJeans definitely knows how to rock the stage!
-                </p>
-              </div>
-            </div>
-          </div>
+          <div class="col-md-12">
+            <h2 class="categorytext">Comments</h2>
+          </div>  
         </div>
-        <div class="row cardset">
-          <div class="col-md-4"></div>
-          <div class="col-md-4">
-            <nav aria-label="Page navigation example">
-              <ul class="pagination">
-                <li class="page-item">
-                  <a class="page-link updates" href="#">Previous</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link updates" href="#">1</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link updates" href="#">2</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link updates" href="#">3</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link updates" href="#">Next</a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
+        <div class="row border-bottom"></div> 
+            {{ render_form(form,"/Events/{0}/comment".format(event.id)) }}
+            
+            {% for comment in event.comments %}
+            <div class="col-md-12">  
+              <b>{{ comment.user.name }} <span class="ml-2 text-muted">January 2024</span></b>
+              <p>{{ comment.text }}</p>  
+            </div> 
+            {% endfor %} 
+        </div>  
+      </div> 
       </div>
     </main>
 {%endblock%}

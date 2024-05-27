@@ -69,6 +69,6 @@ def comment(id):
       # flash('Your comment has been added', 'success')  
       flash ('Your comment has been added', 'success') 
     # using redirect sends a GET request to destination.show
-    return redirect(url_for('Events.details', id=id))
+    return redirect(url_for('Event.details', id=id))
 
 
