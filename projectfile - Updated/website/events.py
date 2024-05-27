@@ -4,7 +4,7 @@ from .forms import EventForm, CommentForm
 from . import db
 import os
 from werkzeug.utils import secure_filename
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 event_bp = Blueprint('Event', __name__, url_prefix="/Events")
 
@@ -26,7 +26,7 @@ def create():
     db_file_path = check_upload_file(form)
     event = Event(name=form.name.data, description=form.description.data, 
     image=db_file_path, start_time=form.star_time.data, end_time=form.end_time.data,
-    location=form.location.data, genre=form.genre.data, price=form.price.data, numberoftickets=form.numberoftickets.data)
+    location=form.location.data, genre=form.genre.data, price=form.price.data, numberoftickets=form.numberoftickets.data, user_id=current_user.id)
     # add the object to the db session
     db.session.add(event)
     # commit to the database

@@ -354,10 +354,10 @@
         </div>
         <div class="row">
           <div class="col-md-12">
+            <div class="row border-bottom mt-5"></div> 
             <h2 class="categorytext">Comments</h2>
           </div>  
         </div>
-        <div class="row border-bottom"></div> 
             {{ render_form(form,"/Events/{0}/comment".format(event.id)) }}
             
             {% for comment in event.comments %}
