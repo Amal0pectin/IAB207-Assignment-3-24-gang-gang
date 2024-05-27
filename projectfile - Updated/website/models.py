@@ -10,6 +10,7 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String(255), nullable=False)
     Event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
     comments = db.relationship('Comment', backref='user')
+    orders = db.relationship('Order', backref='user')
 
     # string print method
     def __repr__(self):
@@ -25,9 +26,12 @@ class Event(db.Model):
     end_time = db.Column(db.DateTime)
     location = db.Column(db.String(80))
     genre = db.Column(db.String(10))
+    price = db.Column(db.Float)
+    numberoftickets = db.Column(db.Integer)
     # ... Create the Comments db.relationship
 	# relation to call destination.comments and comment.destination
     comments = db.relationship('Comment', backref='event')
+    orders = db.relationship('Order', backref='event')
     
     # string print method
     def __repr__(self):
@@ -49,8 +53,13 @@ class Comment(db.Model):
 class Order(db.Model):
     _tablename__ = 'orders'
     id = db.Column(db.Integer, primary_key=True)
+    ticketsbooked = db.Column(db.Integer)
     name = db.Column(db.String(80))
     description = db.Column(db.String(200))
     image = db.Column(db.String(400))
     eventdatetime = db.Column(db.DateTime)
     booked_at = db.Column(db.DateTime, default=datetime.now())
+    
+    # add the foreign keys
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    Event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
