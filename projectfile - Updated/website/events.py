@@ -5,6 +5,7 @@ from . import db
 import os
 from werkzeug.utils import secure_filename
 from flask_login import login_required, current_user
+from datetime import datetime
 
 event_bp = Blueprint('Event', __name__, url_prefix="/Events")
 
@@ -52,7 +53,7 @@ def check_upload_file(form):
 
 
 @event_bp.route('/<id>/comment', methods=['GET', 'POST'])  
-#@login_required
+@login_required
 def comment(id):  
     form = CommentForm()  
     # get the destination object associated to the page and the comment
@@ -60,7 +61,8 @@ def comment(id):
     if form.validate_on_submit():  
       # read the comment from the form, associate the Comment's destination field
       # with the destination object from the above DB query
-      comment = Comment(text=form.text.data, event = event) 
+      comment = Comment(text=form.text.data, event = event)
+      current_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
       # here the back-referencing works - comment.destination is set
       # and the link is created
       db.session.add(comment) 
@@ -70,5 +72,3 @@ def comment(id):
       flash ('Your comment has been added', 'success') 
     # using redirect sends a GET request to destination.show
     return redirect(url_for('Event.details', id=id))
-
-

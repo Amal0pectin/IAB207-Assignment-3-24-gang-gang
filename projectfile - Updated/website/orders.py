@@ -5,7 +5,6 @@ from . import db
 import os
 from werkzeug.utils import secure_filename
 from flask_login import login_required, current_user
-#from flask import login_required
 
 order_bp = Blueprint('Order', __name__, url_prefix="/Order")
 
@@ -17,4 +16,4 @@ def orders():
     orders = db.session.scalars(db.select(Order).join(Event).where(Order.user_id==current_user.id)).all()
 
     print(orders)
-    return render_template('orders.html', orders=orders)
+    return render_template(url_for('orders.html', id=id))

@@ -2,14 +2,15 @@ from flask_wtf import FlaskForm
 from wtforms.fields import TextAreaField, SubmitField, StringField, PasswordField, DateTimeLocalField, RadioField, DecimalField, IntegerField
 from wtforms.validators import InputRequired, Email, EqualTo, NumberRange
 from flask_wtf.file import FileRequired, FileField, FileAllowed
+from datetime import datetime
+from flask_sqlalchemy import SQLAlchemy
 
 ALLOWED_FILE = {'PNG', 'JPG', 'JPEG', 'png', 'jpg', 'jpeg'}
 
 # Create new Event
 class EventForm(FlaskForm):
   name = StringField('Artist', validators=[InputRequired()])
-  description = TextAreaField('Description', 
-            validators = [InputRequired()])
+  description = TextAreaField('Description', validators = [InputRequired()])
   image = FileField('Event Image', validators=[
     FileRequired(message = 'Image cannot be empty'),
     FileAllowed(ALLOWED_FILE, message='Only supports png, jpg, JPG, PNG')])
@@ -49,9 +50,18 @@ class RegisterForm(FlaskForm):
 class CommentForm(FlaskForm):
   text = TextAreaField('Comment', [InputRequired()])
   submit = SubmitField('Create')
+  current_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-
-
-
-
-
+class UpdateForm(FlaskForm):
+  name = StringField('Artist')
+  description = TextAreaField('Description')
+  image = FileField('Event Image',
+    FileRequired(message = 'Image cannot be empty'),
+    FileAllowed(ALLOWED_FILE, message='Only supports png, jpg, JPG, PNG'))
+  star_time = DateTimeLocalField('Start Time')
+  end_time = DateTimeLocalField('End Time')
+  location = StringField('Event Location')
+  genre = StringField('Genre',)
+  price = DecimalField('Price', validators=[NumberRange(min=0, max=1000)])
+  numberoftickets = IntegerField('Number of Tickets', validators=[NumberRange(min=1, max=50000)])
+  submit = SubmitField("Create")

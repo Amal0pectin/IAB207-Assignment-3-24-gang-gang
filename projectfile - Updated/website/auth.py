@@ -1,9 +1,9 @@
 from flask import Blueprint, flash, render_template, request, url_for, redirect
 from werkzeug.security import generate_password_hash,check_password_hash
-from .forms import LoginForm,RegisterForm
+from .forms import LoginForm,RegisterForm, UpdateForm
 from flask_login import login_user, login_required,logout_user
 from . import db
-from .models import User
+from .models import User, Event
 
 # Create a blueprint - make sure all BPs have unique names
 auth_bp = Blueprint('auth', __name__)
@@ -63,28 +63,18 @@ def register():
     else:
         return render_template('user.html', form=register, heading='Register')
 
-
-
-# this is the hint for a login function
-# @auth_bp.route('/login', methods=['GET', 'POST'])
-# def authenticate(): #view function
-#     login_form = LoginForm()
-#     error=None
-#     if(login_form.validate_on_submit()==True):
-#         user_name = login_form.user_name.data
-#         password = login_form.password.data
-#         u1 = User.query.filter_by(name=user_name).first()
-#         if u1 is None:
-#             error='Incorrect user name'
-#         elif not check_password_hash(u1.password_hash, password): # takes the hash and password
-#             error='Incorrect password'
-#         if error is None:
-#             login_user(u1)
-#             nextp = request.args.get('next') #this gives the url from where the login page was accessed
-#             print(nextp)
-#             if next is None or not nextp.startswith('/'):
-#                 return redirect(url_for('index'))
-#             return redirect(nextp)
-#         else:
-#             flash(error)
-#     return render_template('user.html', form=login_form, heading='Login')
+@auth_bp.route('/update_event', methods=['POST'])
+def update_event():
+    event = Event.query.get(request.form['id'])
+    name = request.form['name']
+    description = request.form['description']
+    image = request.form['image']
+    start_time = db.Column(db.DateTime)
+    end_time = db.Column(db.DateTime)
+    location = request.form['location']
+    genre = request.form['genre']
+    price = float(request.form['price'])
+    numberoftickets = int(request.form['numberoftickets'])
+    status = request.form
+    db.seesion.commit()
+    
