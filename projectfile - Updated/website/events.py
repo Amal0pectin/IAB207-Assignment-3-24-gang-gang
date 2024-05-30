@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, abort
-from .models import Event, Comment, User
-from .forms import EventForm, CommentForm
+from .models import Event, Comment, User, Order
+from .forms import EventForm, CommentForm, BookingForm
 from . import db
 import os
 from werkzeug.utils import secure_filename
@@ -13,9 +13,10 @@ event_bp = Blueprint('Event', __name__, url_prefix="/Events")
 def details(id):
     event = db.session.scalar(db.select(Event).where(Event.id==id))
     form = CommentForm()
+    bform = BookingForm()
     if not event:
        abort(404)
-    return render_template('Events/details.html', event = event, form=form)
+    return render_template('Events/details.html', event = event, bform=bform, form=form)
 
 @event_bp.route('/create', methods = ['GET', 'POST'])
 @login_required
@@ -61,7 +62,7 @@ def comment(id):
     if form.validate_on_submit():  
       # read the comment from the form, associate the Comment's destination field
       # with the destination object from the above DB query
-      comment = Comment(text=form.text.data, event = event)
+      comment = Comment(text=form.text.data, event = event, user = current_user)
       current_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
       # here the back-referencing works - comment.destination is set
       # and the link is created
@@ -72,3 +73,23 @@ def comment(id):
       flash ('Your comment has been added', 'success') 
     # using redirect sends a GET request to destination.show
     return redirect(url_for('Event.details', id=id))
+
+@event_bp.route('/<id>/booking', methods=['GET', 'POST'])  
+@login_required
+def booking(id):  
+    form = BookingForm()  
+    # get the destination object associated to the page and the comment
+    event = db.session.scalar(db.select(Event).where(Event.id==id))
+    if form.validate_on_submit():  
+      # read the comment from the form, associate the Comment's destination field
+      # with the destination object from the above DB query
+      order = Order(ticketsbooked=form.ticketsbooked.data, booked_at=datetime.now(), event = event, user = current_user)
+      # here the back-referencing works - comment.destination is set
+      # and the link is created
+      db.session.add(order) 
+      db.session.commit() 
+      # flashing a message which needs to be handled by the html
+      # flash('Your comment has been added', 'success')  
+      flash ('Your order has been added', 'success') 
+    # using redirect sends a GET request to destination.show
+    return redirect(url_for('Order.orders'))
