@@ -17,5 +17,5 @@ def orders():
     if not orders:
         return render_template('no_orders.html') 
     return render_template('orders.html', orders=orders)
-
+    
 

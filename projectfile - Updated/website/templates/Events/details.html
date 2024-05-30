@@ -93,6 +93,20 @@
           <div class="row justify-content-between">
             <div class="col-md-3">
               <h1 class="mb-0">{{event.name}}</h1>
+
+            {% if event.status == 'Open' %}
+               <span class="badge bg-success">{{event.status}}</span>
+            {% endif %}
+            {% if event.status == 'Inactive' %}
+               <span class="badge bg-secondary">{{event.status}}</span>
+            {% endif %}
+            {% if event.status == 'Sold Out' %}
+               <span class="badge bg-danger">{{event.status}}</span>
+            {% endif %}
+            {% if event.status == 'Cancelled' %}
+               <span class="badge bg-warning">{{event.status}}</span>
+            {% endif %}
+              
             </div>
             <div class="col-md-6">
               <img
@@ -122,69 +136,22 @@
             <p>Presented by: EventMasters</p>
             <p> {{event.description}}
             </p>
-            <p>Event Starts At : {{event.start_date}}</p>
-            <p>Event Ends At : {{event.end_date}}</p>
+            <p>Event Starts At : {{event.start_time}}</p>
+            <p>Event Ends At : {{event.end_time}}</p>
           </div>
         </div>
 
+        <br>
+
         <h2 class="categorytext">Book Tickets</h2>
+        {% if event.status == 'Open' %}
         <div class="row">
           {{render_form(bform,"/Events/{0}/booking".format(event.id), extra_classes="form-control")}}
         </div>
+        {% else %}
+          <h2 class="form-control">Sorry! This event cannot be booked anymore lols</h2>
+        {% endif %}
 
-        <div class="row cardset">
-          <div class="col-md">
-            <!-- Button trigger modal -->
-            <button
-              type="button"
-              class="btn btn-primary"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
-            >
-              Purchase
-            </button>
-
-            <!-- Modal -->
-            <div
-              class="modal fade"
-              id="exampleModal"
-              tabindex="-1"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                      Purchase Complete
-                    </h1>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                  <div class="modal-body">
-                    Congratulation on your Purchase of these ticket/s. Hope you
-                    have a wonderful time.
-                  </div>
-                  <div class="modal-footer">
-                    <a href="Booking.html">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-bs-dismiss="modal"
-                    >
-                      Close
-                    </button>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         <div class="row">
           <div class="col-md-12">
             <div class="row border-bottom mt-5"></div> 

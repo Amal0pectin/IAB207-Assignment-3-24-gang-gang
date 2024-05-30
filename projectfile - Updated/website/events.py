@@ -83,7 +83,23 @@ def booking(id):
     if form.validate_on_submit():  
       # read the comment from the form, associate the Comment's destination field
       # with the destination object from the above DB query
-      order = Order(ticketsbooked=form.ticketsbooked.data, booked_at=datetime.now(), event = event, user = current_user)
+
+      requestedtickets = form.ticketsbooked.data
+      remainingtickets = event.numberoftickets
+
+      if requestedtickets > remainingtickets:
+        flash ('You are requesting more than the maximum ' + str(remainingtickets) + ' tickets', 'warning')
+        return redirect(url_for('Event.details', id=event.id))
+
+     
+      order = Order(ticketsbooked=requestedtickets, booked_at=datetime.now().strftime("%Y-%m-%d %H:%M:%S"), event = event, user = current_user)
+
+      if requestedtickets == remainingtickets:
+        event.status = 'Sold Out'
+      
+      #reduce event num tickets
+      event.numberoftickets = event.numberoftickets - requestedtickets
+
       # here the back-referencing works - comment.destination is set
       # and the link is created
       db.session.add(order) 

@@ -27,7 +27,7 @@ class EventForm(FlaskForm):
 
 class BookingForm (FlaskForm):
   ticketsbooked = IntegerField('Number of Tickets', validators=[InputRequired(), NumberRange(min=1, max=10)])
-  delivery_type = RadioField('Choose Delivery Option', choices=[('Mobile Ticket (via SMS)','$8.50'),('Print-At-Home (PDF)','$8.50'),('Venue / Pre-Paid Collection Outlet', '$11.50') ])
+  delivery_type = RadioField('Choose Delivery Option', validators=[InputRequired()], choices=[('Mobile Ticket (via SMS)','$8.50'),('Print-At-Home (PDF)','$8.50'),('Venue / Pre-Paid Collection Outlet', '$11.50') ])
   submit = SubmitField("Book")
 
 #creates the login information

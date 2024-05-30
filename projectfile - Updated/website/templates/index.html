@@ -87,9 +87,20 @@
 {% block content %}
     <main>
       <div class="container text-center">
-        <div
-          class="row categorybg" 
-        >
+        <div class="row justify-content-center mt-5 pb-4">
+          <div class="col-md-8">
+             <div class="card shadow p-5 mb-5 bg-light">
+                <h1 class="text-center mb-3">Search For Events</h1>
+
+                <form class="form-inline d-flex flex-nowrap" action="{{url_for('main.search')}}" >
+                   <input type="text" name="search" class="form-control flex-grow-1 my-1 mr-sm-2" id="SearchForm">
+                   <button type="submit" class="flex-shrink-1 btn btn-primary my-1">Submit</button>
+                 </form>
+                
+             </div>
+          </div>
+       </div>
+        <div class="row categorybg">
           <div class="col-md-3 mb-3">
             <input
               type="time"
@@ -219,9 +230,20 @@
               />
               <div class="card-body d-flex flex-column justify-content-between">
                 <div>
-                  <button type="button" class="btn btn-success">
-                    {{events.status}}
-                  </button>
+                  <div>
+                    {% if events.status == 'Open' %}
+                    <span class="badge bg-success">{{events.status}}</span>
+                    {% endif %}
+                    {% if events.status == 'Inactive' %}
+                        <span class="badge bg-secondary">{{events.status}}</span>
+                    {% endif %}
+                    {% if events.status == 'Sold Out' %}
+                        <span class="badge bg-danger">{{events.status}}</span>
+                    {% endif %}
+                    {% if events.status == 'Cancelled' %}
+                        <span class="badge bg-warning">{{events.status}}</span>
+                    {% endif %}
+                  </div>
                   <h5 class="card-title mt-2">{{ events.name }}</h5>
                   <p class="card-text">{{ events.description }}</p>
                   <p class="card-text">Start Time: {{ events.start_time }}</p>
