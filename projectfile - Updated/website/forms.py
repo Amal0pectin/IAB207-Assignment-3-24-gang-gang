@@ -4,7 +4,6 @@ from wtforms.validators import InputRequired, Email, EqualTo, NumberRange
 from flask_wtf.file import FileRequired, FileField, FileAllowed
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
-
 ALLOWED_FILE = {'PNG', 'JPG', 'JPEG', 'png', 'jpg', 'jpeg'}
 
 # Create new Event
@@ -25,7 +24,7 @@ class EventForm(FlaskForm):
 # Bookings
 
 class BookingForm (FlaskForm):
-   ticket_type = RadioField('Select Ticket', choices=[('Best Available','(any price) From $200'),('A Reserve ','$400'),('B Reserve', '$300'), ('C Reserve', '$200')])
+   ticket_type = RadioField('Select Ticket', choices=[])
 
    delivery_type = RadioField('Choose Delivery Option', choices=[('Mobile Ticket (via SMS)','$8.50'),('Print-At-Home (PDF)','$8.50'),('Venue / Pre-Paid Collection Outlet', '$11.50') ])
 #creates the login information
@@ -65,4 +64,4 @@ class UpdateForm(FlaskForm):
   genre = StringField('Genre',)
   price = DecimalField('Price', validators=[NumberRange(min=0, max=1000)])
   numberoftickets = IntegerField('Number of Tickets', validators=[NumberRange(min=1, max=50000)])
-  submit = SubmitField("Create")
+  submit = SubmitField("Update")
