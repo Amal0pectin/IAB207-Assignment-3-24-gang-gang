@@ -52,6 +52,7 @@ class CommentForm(FlaskForm):
   submit = SubmitField('Create')
   current_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
+# Update Event
 class UpdateForm(FlaskForm):
   name = StringField('Artist')
   description = TextAreaField('Description')
