@@ -63,18 +63,8 @@ def register():
     else:
         return render_template('user.html', form=register, heading='Register')
 
-@auth_bp.route('/update_event', methods=['POST'])
+@auth_bp.route('/update_event', methods=['GET','POST'])
 def update_event():
-    event = Event.query.get(request.form['id'])
-    name = request.form['name']
-    description = request.form['description']
-    image = request.form['image']
-    start_time = db.Column(db.DateTime)
-    end_time = db.Column(db.DateTime)
-    location = request.form['location']
-    genre = request.form['genre']
-    price = float(request.form['price'])
-    numberoftickets = int(request.form['numberoftickets'])
-    status = request.form
-    db.seesion.commit()
+    update_event_form=UpdateForm()
+
     

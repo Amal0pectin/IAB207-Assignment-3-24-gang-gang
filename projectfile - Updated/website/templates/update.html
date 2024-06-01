@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block header %}
+
+      <div id="carouselExampleDark" class="carousel carousel-dark slide">
+        <div class="carousel-indicators">
+          <button
+            type="button"
+            data-bs-target="#carouselExampleDark"
+            data-bs-slide-to="0"
+            class="active"
+            aria-current="true"
+            aria-label="Slide 1"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleDark"
+            data-bs-slide-to="1"
+            aria-label="Slide 2"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleDark"
+            data-bs-slide-to="2"
+            aria-label="Slide 3"
+          ></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="10000">
+            <a href="Event Details.html">
+              <img src="Static/Img/BTS.jpg" class="d-block w-100" alt="..." />
+            </a>
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Upcoming Events</h5>
+              <p>Watch BTS Preform Live</p>
+            </div>
+          </div>
+          <div class="carousel-item" data-bs-interval="2000">
+            <a href="Event Details.html">
+              <img
+                src="Static/Img/Olivia rodrigo.jpg"
+                class="d-block w-100"
+                alt="..."
+              />
+            </a>
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Upcoming Events</h5>
+              <p>Watch Oliva Rodrigo Preform Live</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <a href="Event Details.html">
+              <img
+                src="Static/Img/Zayn malik.png"
+                class="d-block w-100"
+                alt="..."
+              />
+            </a>
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Upcoming Events</h5>
+              <p>Watch Zayn Malik preform Live</p>
+            </div>
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleDark"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleDark"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+{% endblock %}
+
+{% block content %}
+    <main class="cardset">
+      <div class="container text-center">
+        <h2 class="categorytext">Booked Events</h2>
+        <h3 class="text-center">No events booked</h3>
+
+        <div class="row cardset">
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item">
+                  <a class="page-link updates" href="#">Previous</a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link updates" href="#">1</a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link updates" href="#">2</a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link updates" href="#">3</a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link updates" href="#">Next</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </main>
+{% endblock %}
