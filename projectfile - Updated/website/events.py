@@ -91,7 +91,6 @@ def booking(id):
         flash ('You are requesting more than the maximum ' + str(remainingtickets) + ' tickets', 'warning')
         return redirect(url_for('Event.details', id=event.id))
 
-     
       order = Order(ticketsbooked=requestedtickets, booked_at=datetime.now().strftime("%Y-%m-%d %H:%M:%S"), event = event, user = current_user)
 
       if requestedtickets == remainingtickets:
@@ -111,6 +110,20 @@ def booking(id):
     return redirect(url_for('Order.orders'))
 
 @event_bp.route('/update_event', methods=['GET','POST'])
+@login_required
 def update_event(id):
   form = UpdateForm()
-  event = db.session.scalar(db.select(Event).where(Event.id==id))
+  if form.validate_on_submit():
+    # call the function that checks and returns image
+    db_file_path = check_upload_file(form)
+    event = Event(name=form.name.data, description=form.description.data, 
+    image=db_file_path, start_time=form.star_time.data, end_time=form.end_time.data,
+    location=form.location.data, genre=form.genre.data, price=form.price.data, numberoftickets=form.numberoftickets.data, user_id=current_user.id)
+    # add the object to the db session
+    db.session.add(event)
+    # commit to the database
+    db.session.commit()
+    flash('Successfully updated Event', 'success')
+    return redirect(url_for('Event.details'))
+  return render_template('update.html', form=form, id=event.id)
+
