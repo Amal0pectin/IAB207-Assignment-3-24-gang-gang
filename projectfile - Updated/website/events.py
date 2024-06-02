@@ -108,3 +108,23 @@ def booking(id):
       flash ('Your order has been added', 'success') 
     # using redirect sends a GET request to destination.show
     return redirect(url_for('Order.orders'))
+
+@event_bp.route('/update', methods = ['GET', 'POST'])
+@login_required
+def update():
+  print('Method type: ', request.method)
+  form = EventForm()
+  if form.validate_on_submit():
+    # call the function that checks and returns image
+    db_file_path = check_upload_file(form)
+    event = Event(name=form.name.data, description=form.description.data, 
+    image=db_file_path, start_time=form.star_time.data, end_time=form.end_time.data,
+    location=form.location.data, genre=form.genre.data, price=form.price.data, numberoftickets=form.numberoftickets.data, user_id=current_user.id)
+    # add the object to the db session
+    db.session.add(event)
+    # commit to the database
+    db.session.commit()
+    flash('Successfully created new Event', 'success')
+    return redirect(url_for('Event.update'))
+  return render_template('update.html', form=form)
+
