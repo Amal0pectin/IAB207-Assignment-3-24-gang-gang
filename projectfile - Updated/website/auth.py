@@ -1,9 +1,9 @@
 from flask import Blueprint, flash, render_template, request, url_for, redirect
 from werkzeug.security import generate_password_hash,check_password_hash
-from .forms import LoginForm,RegisterForm, UpdateForm
+from .forms import LoginForm,RegisterForm
 from flask_login import login_user, login_required,logout_user
 from . import db
-from .models import User, Event
+from .models import User
 
 # Create a blueprint - make sure all BPs have unique names
 auth_bp = Blueprint('auth', __name__)
@@ -62,9 +62,4 @@ def register():
     #the else is called when the HTTP request calling this page is a GET
     else:
         return render_template('user.html', form=register, heading='Register')
-
-@auth_bp.route('/update_event', methods=['GET','POST'])
-def update_event():
-    update_event_form=UpdateForm()
-
     

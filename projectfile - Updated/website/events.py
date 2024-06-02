@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, abort
 from .models import Event, Comment, User, Order
-from .forms import EventForm, CommentForm, BookingForm
+from .forms import EventForm, CommentForm, BookingForm, UpdateForm
 from . import db
 import os
 from werkzeug.utils import secure_filename
@@ -109,3 +109,8 @@ def booking(id):
       flash ('Your order has been added', 'success') 
     # using redirect sends a GET request to destination.show
     return redirect(url_for('Order.orders'))
+
+@event_bp.route('/update_event', methods=['GET','POST'])
+def update_event(id):
+  form = UpdateForm()
+  event = db.session.scalar(db.select(Event).where(Event.id==id))
