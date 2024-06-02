@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, abort
+from flask import Blueprint, render_template, request, redirect, url_for, flash, abort, Flask
 from .models import Event, Comment, User, Order
 from .forms import EventForm, CommentForm, BookingForm, UpdateForm
 from . import db
