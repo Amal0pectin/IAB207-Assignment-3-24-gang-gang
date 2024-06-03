@@ -8,8 +8,9 @@ from flask_login import login_required, current_user
 
 order_bp = Blueprint('Order', __name__, url_prefix="/Order")
 
-@login_required
+
 @order_bp.route('/BookingHistory')
+@login_required
 def orders():
     # eventually we will query the database table 'destinations'for this id
     ## and get back all relevant information for that destination

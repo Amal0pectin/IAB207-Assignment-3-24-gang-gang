@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, abort, Flask
 from .models import Event, Comment, User, Order
-from .forms import EventForm, CommentForm, BookingForm, UpdateForm
+from .forms import EventForm, CommentForm, BookingForm 
 from . import db
 import os
 from werkzeug.utils import secure_filename
@@ -109,23 +109,19 @@ def booking(id):
     # using redirect sends a GET request to destination.show
     return redirect(url_for('Order.orders'))
 
-@event_bp.route('/update', methods = ['GET', 'POST'])
+@event_bp.route('/update/<id>', methods = ['GET', 'POST'])
 @login_required
-def update():
+def update(id):
   print('Method type: ', request.method)
-  form = EventForm()
-  name_to_update = Event.query.get(id)
+  event = db.session.query(Event).get(Event.id)
+  form = EventForm(obj=event)
   if form.validate_on_submit():
     # call the function that checks and returns image
-    db_file_path = check_upload_file(form)
-    event = Event(name=form.name.data, description=form.description.data, 
-    image=db_file_path, start_time=form.star_time.data, end_time=form.end_time.data,
-    location=form.location.data, genre=form.genre.data, price=form.price.data, numberoftickets=form.numberoftickets.data, user_id=current_user.id)
-    # add the object to the db session
+    form.populate_obj(event)
     db.session.add(event)
     # commit to the database
     db.session.commit()
     flash('Successfully created new Event', 'success')
-    return redirect(url_for('Event.update'))
-  return render_template('update.html', form=form)
+    return redirect(url_for('Event.create'))
+  return render_template('create.html', form=form)
 

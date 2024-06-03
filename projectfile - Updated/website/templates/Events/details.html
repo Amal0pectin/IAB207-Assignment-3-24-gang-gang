@@ -138,6 +138,7 @@
             </p>
             <p>Event Starts At : {{event.start_time}}</p>
             <p>Event Ends At : {{event.end_time}}</p>
+            <button href="{{ url_for('Event.update',id=event.id) }}">Update Event</button>
           </div>
         </div>
 
