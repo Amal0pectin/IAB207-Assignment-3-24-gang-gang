@@ -114,6 +114,7 @@ def booking(id):
 def update():
   print('Method type: ', request.method)
   form = EventForm()
+  name_to_update = Event.query.get(id)
   if form.validate_on_submit():
     # call the function that checks and returns image
     db_file_path = check_upload_file(form)
