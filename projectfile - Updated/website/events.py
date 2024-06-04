@@ -63,7 +63,7 @@ def comment(id):
       # read the comment from the form, associate the Comment's destination field
       # with the destination object from the above DB query
       comment = Comment(text=form.text.data, event = event, user = current_user)
-      current_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+      created_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
       # here the back-referencing works - comment.destination is set
       # and the link is created
       db.session.add(comment) 

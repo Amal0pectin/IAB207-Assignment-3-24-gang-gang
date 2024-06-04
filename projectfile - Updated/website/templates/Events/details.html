@@ -138,7 +138,10 @@
             </p>
             <p>Event Starts At : {{event.start_time}}</p>
             <p>Event Ends At : {{event.end_time}}</p>
+          {% if event.user_id == current_user %}
             <button href="{{ url_for('Event.update',id=event.id) }}">Update Event</button>
+          {% else %}
+          {% endif %}
           </div>
         </div>
 
@@ -163,7 +166,7 @@
             
             {% for comment in event.comments %}
             <div class="col-md-12">  
-              <b>{{ comment.user.name }} <span class="ml-2 text-muted">{{ comment.current_date }}</span></b>
+              <b>{{ comment.user.name }} <span class="ml-2 text-muted">{{ comment.created_at }}</span></b>
               <p>{{ comment.text }}</p>  
             </div> 
             {% endfor %} 
