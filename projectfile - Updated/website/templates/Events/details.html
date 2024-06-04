@@ -138,10 +138,9 @@
             </p>
             <p>Event Starts At : {{event.start_time}}</p>
             <p>Event Ends At : {{event.end_time}}</p>
-          {% if event.user_id == current_user %}
+            {% if event.user_id == current_user.id %}
             <button href="{{ url_for('Event.update',id=event.id) }}">Update Event</button>
-          {% else %}
-          {% endif %}
+            {% endif %}
           </div>
         </div>
 
