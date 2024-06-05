@@ -27,12 +27,12 @@
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active" data-bs-interval="10000">
-            <a href="Event Details.html">
-              <img src="Static/Img/BTS.jpg" class="d-block w-100" alt="..." />
+            <a href="{{ url_for('Event.details', id=events.id) }}">
+              <img src="{{url_for('static', filename=events.image)}}" class="d-block w-100" alt="..." />
             </a>
             <div class="carousel-caption d-none d-md-block">
               <h5>Upcoming Events</h5>
-              <p>Watch BTS Preform Live</p>
+              <p>{{events.description}}</p>
             </div>
           </div>
           <div class="carousel-item" data-bs-interval="2000">
