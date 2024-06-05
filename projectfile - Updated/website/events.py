@@ -109,9 +109,9 @@ def booking(id):
     # using redirect sends a GET request to destination.show
     return redirect(url_for('Order.orders'))
 
-@event_bp.route('/update/<id>', methods = ['GET', 'POST'])
+@event_bp.route('/update', methods = ['GET', 'POST'])
 @login_required
-def update(id):
+def update():
   print('Method type: ', request.method)
   event = db.session.query(Event).get(Event.id)
   form = EventForm(obj=event)
@@ -122,6 +122,6 @@ def update(id):
     # commit to the database
     db.session.commit()
     flash('Successfully created new Event', 'success')
-    return redirect(url_for('Event.create'))
+    return redirect(url_for('Event.update'))
   return render_template('create.html', form=form)
 
