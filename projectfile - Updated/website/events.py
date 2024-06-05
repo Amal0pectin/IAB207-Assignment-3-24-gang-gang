@@ -109,13 +109,15 @@ def booking(id):
     # using redirect sends a GET request to destination.show
     return redirect(url_for('Order.orders'))
 
-@event_bp.route('/update/<id>', methods = ['GET', 'POST'])
+@event_bp.route('/update/<int:id>', methods = ['GET', 'POST'])
 @login_required
 def update(id):
-  print('Method type: ', request.method)
   event = db.session.scalar(db.select(Event).where(Event.id==id))
+  
   form = UpdateForm(obj=event)
-  if request.method == 'GET' and event:
+
+  if form.validate_on_submit():
+
     form.name.data = event.name
     form.description.data = event.description
     form.star_time.data = event.start_time
@@ -124,14 +126,10 @@ def update(id):
     form.genre.data = event.genre
     form.price.data = event.price
     form.numberoftickets.data = event.numberoftickets
-
-  if form.validate_on_submit():
-    event = Event(name=form.name.data, description=form.description.data, start_time=form.star_time.data, end_time=form.end_time.data,
-    location=form.location.data, genre=form.genre.data, price=form.price.data, numberoftickets=form.numberoftickets.data, id=id) 
     
     # commit to the database
     db.session.commit()
     flash('Successfully upated Event', 'success')
-    return redirect(url_for('Event.update', id=id))
-  return render_template('Events/update.html', form=form)
+    return redirect(url_for('Event.details', id=event.id))
+  return render_template('/Events/update.html', form=form, id=id)
 
