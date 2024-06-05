@@ -126,13 +126,10 @@ def update(id):
     form.numberoftickets.data = event.numberoftickets
 
   if form.validate_on_submit():
-    db_file_path = check_upload_file(form)
-    event = Event(name=form.name.data, description=form.description.data, 
-    image=db_file_path, start_time=form.star_time.data, end_time=form.end_time.data,
-    location=form.location.data, genre=form.genre.data, price=form.price.data, numberoftickets=form.numberoftickets.data) 
+    event = Event(name=form.name.data, description=form.description.data, start_time=form.star_time.data, end_time=form.end_time.data,
+    location=form.location.data, genre=form.genre.data, price=form.price.data, numberoftickets=form.numberoftickets.data, id=id) 
     
     # commit to the database
-    db.session.add(event)
     db.session.commit()
     flash('Successfully upated Event', 'success')
     return redirect(url_for('Event.update', id=id))
