@@ -91,7 +91,7 @@ def booking(id):
         flash ('You are requesting more than the maximum ' + str(remainingtickets) + ' tickets', 'warning')
         return redirect(url_for('Event.details', id=event.id))
 
-      order = Order(ticketsbooked=requestedtickets, booked_at=datetime.now().strftime("%Y-%m-%d %H:%M:%S"), event = event, user = current_user)
+      order = Order(ticketsbooked=requestedtickets, booked_at=datetime.now(), event = event, user = current_user,)
 
       if requestedtickets == remainingtickets:
         event.status = 'Sold Out'

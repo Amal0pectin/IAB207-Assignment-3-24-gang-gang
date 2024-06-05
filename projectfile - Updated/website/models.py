@@ -56,7 +56,7 @@ class Order(db.Model):
     _tablename__ = 'orders'
     id = db.Column(db.Integer, primary_key=True)
     ticketsbooked = db.Column(db.Integer)
-    booked_at = db.Column(db.DateTime, default=datetime.now())
+    booked_at = db.Column(db.DateTime, default=datetime.now(),nullable=False)
     
     # add the foreign keys
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
