@@ -1,14 +1,15 @@
-{% include "base.html" %}
+{% extends "base.html" %}
 {% from "bootstrap5/form.html" import render_form %}
-{% block body %}
+{% block content %}
 
 <div class="page-header">
-    <h4>{{heading}}</h4>
+    <br>
+    <h4 style="color: white;">{{heading}}</h4>
 </div>
 
 <!-- Form rendering is simple and easy if using bootstrap -->
 <div class="col-md-6">
-    {{render_form(form)}}
+    {{render_form(form,extra_classes='formdark')}}
 </div>
 
 <!-- When you have login form, then do show the user a link to register -->

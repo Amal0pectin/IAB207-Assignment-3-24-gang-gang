@@ -116,3 +116,13 @@
 .carousel-caption h5, p {
     color: white;
 }
+
+.formdark label {
+    color: white; 
+}
+
+footer {
+    position:relative;
+    bottom: 0;
+    width: 100%;
+}
