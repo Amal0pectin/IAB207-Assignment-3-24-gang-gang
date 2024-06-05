@@ -40,7 +40,7 @@
         </div>
 
         <div class="row justify-content-between cardset">
-          <div class="col-md-5">
+          <div class="col-md-4">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14161.472880766996!2d153.034627!3d-27.4577936!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b91592f8013be8d%3A0x349b71d19fceb321!2sFortitude%20Music%20Hall!5e0!3m2!1sen!2sau!4v1713521338127!5m2!1sen!2sau"
               width="100%"
@@ -52,7 +52,7 @@
             ></iframe>
           </div>
 
-          <div class="col-md-5 categorytext emailins">
+          <div class="col-md-4 categorytext emailins">
             <h2>Event Details</h2>
             <p>Presented by: EventMasters</p>
             <p> {{event.description}}
@@ -63,18 +63,22 @@
             <a href="{{ url_for('Event.update',id=event.id) }}" class="btn btn-primary">Update Event</a>
             {% endif %}
           </div>
+
+          <div class="col-md-4 categorytext emailins">
+            <h2 class="categorytext">Book Tickets</h2>
+            {% if event.status == 'Open' %}
+            <div class="row">
+              {{render_form(bform,"/Events/{0}/booking".format(event.id), extra_classes="form-control")}}
+            </div>
+            {% else %}
+              <h2 class="form-control">Sorry! This event cannot be booked anymore lols</h2>
+            {% endif %}
+          </div>
         </div>
 
         <br>
 
-        <h2 class="categorytext">Book Tickets</h2>
-        {% if event.status == 'Open' %}
-        <div class="row">
-          {{render_form(bform,"/Events/{0}/booking".format(event.id), extra_classes="form-control")}}
-        </div>
-        {% else %}
-          <h2 class="form-control">Sorry! This event cannot be booked anymore lols</h2>
-        {% endif %}
+        
 
         <div class="row">
           <div class="col-md-12">
