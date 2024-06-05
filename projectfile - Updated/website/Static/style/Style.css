@@ -105,4 +105,14 @@
 #welcomenavbar {
     color:white !important;
     font-style: italic;
-}   
+}
+
+.carousel-caption {
+    background-color: rgba(0,0,0,.5);
+    color: white;
+    font-size: xx-large;
+}
+
+.carousel-caption h5, p {
+    color: white;
+}
