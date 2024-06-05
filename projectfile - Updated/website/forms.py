@@ -56,15 +56,15 @@ class CommentForm(FlaskForm):
 
 # Update Event
 class UpdateForm(FlaskForm):
-  name = StringField('Artist')
-  description = TextAreaField('Description')
-  image = FileField('Event Image',
+  name = StringField('Artist', validators=[InputRequired()])
+  description = TextAreaField('Description', validators = [InputRequired()])
+  image = FileField('Event Image', validators=[
     FileRequired(message = 'Image cannot be empty'),
-    FileAllowed(ALLOWED_FILE, message='Only supports png, jpg, JPG, PNG'))
-  star_time = DateTimeLocalField('Start Time')
-  end_time = DateTimeLocalField('End Time')
-  location = StringField('Event Location')
-  genre = StringField('Genre',)
-  price = DecimalField('Price', validators=[NumberRange(min=0, max=1000)])
-  numberoftickets = IntegerField('Number of Tickets', validators=[NumberRange(min=1, max=50000)])
+    FileAllowed(ALLOWED_FILE, message='Only supports png, jpg, JPG, PNG')])
+  star_time = DateTimeLocalField('Start Time', validators=[InputRequired()])
+  end_time = DateTimeLocalField('End Time', validators=[InputRequired()])
+  location = StringField('Event Location', validators=[InputRequired()])
+  genre = StringField('Genre', validators=[InputRequired()])
+  price = DecimalField('Price', validators=[InputRequired(), NumberRange(min=0, max=1000)])
+  numberoftickets = IntegerField('Number of Tickets', validators=[InputRequired(), NumberRange(min=1, max=50000)])
   submit = SubmitField("Update")
