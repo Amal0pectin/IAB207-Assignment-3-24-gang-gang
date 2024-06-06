@@ -87,14 +87,13 @@
             <div class="card shadow p-5 mb-5 bg-dark">
               <div class="col-md-8">
                 <h1 class="text-center mb-3"; style="color: white;">Search For Events</h1>
-
                 <form class="form-inline d-flex flex-nowrap" action="{{url_for('main.search')}}" >
                    <input type="text" name="search" class="form-control flex-grow-1 my-1 mr-sm-2" id="SearchForm">
                    <button type="submit" class="flex-shrink-1 btn btn-primary my-1">Submit</button>
                  </form>
               </div>
 
-              <div class="col-md-2">
+              <div class="col-md-4">
                 <form  class="form-inline d-flex flex-nowrap" action="{{url_for('main.genre_search')}}" >
                   <select name="genre_search" class="form-select" aria-label="Default select example">
                     <option selected>Filter By Genre</option>
