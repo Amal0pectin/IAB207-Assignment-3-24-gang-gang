@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from .models import Event
 from . import db
+
+
 main_bp = Blueprint('main', __name__)
 
 @main_bp.route('/')
@@ -17,4 +19,15 @@ def search():
         return render_template('index.html', events=events)
     else:
         return redirect(url_for('main.index'))
+    
 
+
+@main_bp.route('/genre_search')
+def genre_search():
+    if request.args['genre_search']:
+        print(request.args['genre_search'])
+        query = request.args['genre_search']
+        events = db.session.scalars(db.select(Event).where(Event.genre.like(query)))
+        return render_template('index.html', events=events)
+    else:
+        return redirect(url_for('main.index'))

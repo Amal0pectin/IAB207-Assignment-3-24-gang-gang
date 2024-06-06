@@ -24,7 +24,7 @@ class Event(db.Model):
     start_time = db.Column(db.DateTime)
     end_time = db.Column(db.DateTime)
     location = db.Column(db.String(80))
-    genre = db.Column(db.Integer)
+    genre = db.Column(db.String)
     price = db.Column(db.Float)
     numberoftickets = db.Column(db.Integer)
     status = db.Column(db.String(20), default="Open")

@@ -125,3 +125,6 @@ def update(id):
     return redirect(url_for('Event.details', id=event.id))
   return render_template('/Events/update.html', form=form, id=id)
 
+
+
+

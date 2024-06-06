@@ -83,43 +83,34 @@
 {% block content %}
     <main>
       <div class="container text-center">
-        <div class="row justify-content-center mt-5 pb-4">
-          <div class="col-md-8">
-             <div class="card shadow p-5 mb-5 bg-dark">
+          <div class="row justify-content-center mt-5 pb-4">
+            <div class="card shadow p-5 mb-5 bg-dark">
+              <div class="col-md-8">
                 <h1 class="text-center mb-3"; style="color: white;">Search For Events</h1>
 
                 <form class="form-inline d-flex flex-nowrap" action="{{url_for('main.search')}}" >
                    <input type="text" name="search" class="form-control flex-grow-1 my-1 mr-sm-2" id="SearchForm">
                    <button type="submit" class="flex-shrink-1 btn btn-primary my-1">Submit</button>
                  </form>
+              </div>
 
-                
-             </div>
-          </div>
-       </div>
-        <div class="row categorybg">
-          <div class="col-md-3 mb-3">
-            <h1 class="text-center mb-3">Search by Genre</h1>
-            <select class="form-select" aria-label="Default select example">
-              <option selected>--select genre--</option>
-              <option value="1">HipHop</option>
-              <option value="2">Pop</option>
-              <option value="3">Rock</option>
-              <option value="4">Metal</option>
-              <option value="5">Indie</option>
-              <option value="6">Folk</option>
-              <option value="7">EDM</option>
-            </select>
-          </div>
-          <div class="col-md-3 mb-3">
-            <button
-              type="button"
-              class="btn btn-success btn-block apply"
-            >
-              Apply
-            </button>
-          </div>
-        </div>
+              <div class="col-md-2">
+                <form  class="form-inline d-flex flex-nowrap" action="{{url_for('main.genre_search')}}" >
+                  <select name="genre_search" class="form-select" aria-label="Default select example">
+                    <option selected>Filter By Genre</option>
+                    <option value="Pop">Pop</option>
+                    <option value="HipHop">HipHop</option>
+                    <option value="Rock">Rock</option>
+                    <option value="Metal">Metal</option>
+                    <option value="Indie">Indie</option>
+                    <option value="Folk">Folk</option>
+                    <option value="EDM">EDM</option>
+                  </select>
+                  <button type="submit" class="flex-shrink-1 btn btn-primary my-1">Submit</button>
+                </form>
+              </div>
+           </div>
+         </div>
 
         <div class="row row-cols-1 row-cols-md-4 g-4 cardset">
           {% for events in events %}
