@@ -112,20 +112,12 @@ def booking(id):
 @event_bp.route('/update/<int:id>', methods = ['GET', 'POST'])
 @login_required
 def update(id):
-  event = db.session.scalar(db.select(Event).where(Event.id==id))
+  event = db.session.query(Event).get(id)
   
   form = UpdateForm(obj=event)
 
   if form.validate_on_submit():
-
-    event.name = form.name.data
-    event.descriptionform = form.description.data
-    event.start_time = form.start_time.data
-    event.end_time = form.end_time.data
-    event.location = form.location.data 
-    event.genre = form.genre.data 
-    event.price = form.price.data
-    event.numberoftickets = form.numberoftickets.data 
+    form.populate_obj(event)
     
     # commit to the database
     db.session.commit()
