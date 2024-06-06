@@ -118,14 +118,14 @@ def update(id):
 
   if form.validate_on_submit():
 
-    form.name.data = event.name
-    form.description.data = event.description
-    form.start_time.data = event.start_time
-    form.end_time.data = event.end_time
-    form.location.data = event.location
-    form.genre.data = event.genre
-    form.price.data = event.price
-    form.numberoftickets.data = event.numberoftickets
+    event.name = form.name.data
+    event.descriptionform = form.description.data
+    event.start_time = form.start_time.data
+    event.end_time = form.end_time.data
+    event.location = form.location.data 
+    event.genre = form.genre.data 
+    event.price = form.price.data
+    event.numberoftickets = form.numberoftickets.data 
     
     # commit to the database
     db.session.commit()
