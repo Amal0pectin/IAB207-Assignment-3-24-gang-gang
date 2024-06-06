@@ -120,7 +120,7 @@ def update(id):
 
     form.name.data = event.name
     form.description.data = event.description
-    form.star_time.data = event.start_time
+    form.start_time.data = event.start_time
     form.end_time.data = event.end_time
     form.location.data = event.location
     form.genre.data = event.genre

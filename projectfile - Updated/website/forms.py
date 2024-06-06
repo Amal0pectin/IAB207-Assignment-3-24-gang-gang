@@ -15,7 +15,7 @@ class EventForm(FlaskForm):
   image = FileField('Event Image', validators=[
     FileRequired(message = 'Image cannot be empty'),
     FileAllowed(ALLOWED_FILE, message='Only supports png, jpg, JPG, PNG')])
-  star_time = DateTimeLocalField('Start Time', validators=[InputRequired()])
+  start_time = DateTimeLocalField('Start Time', validators=[InputRequired()])
   end_time = DateTimeLocalField('End Time', validators=[InputRequired()])
   location = StringField('Event Location', validators=[InputRequired()])
   genre = StringField('Genre', validators=[InputRequired()])
@@ -58,7 +58,7 @@ class CommentForm(FlaskForm):
 class UpdateForm(FlaskForm):
   name = StringField('Artist', validators=[InputRequired()])
   description = TextAreaField('Description', validators = [InputRequired()])
-  star_time = DateTimeLocalField('Start Time', validators=[InputRequired()])
+  start_time = DateTimeLocalField('Start Time', validators=[InputRequired()])
   end_time = DateTimeLocalField('End Time', validators=[InputRequired()])
   location = StringField('Event Location', validators=[InputRequired()])
   genre = StringField('Genre', validators=[InputRequired()])
