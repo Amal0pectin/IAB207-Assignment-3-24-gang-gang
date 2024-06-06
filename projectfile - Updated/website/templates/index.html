@@ -92,118 +92,24 @@
                    <input type="text" name="search" class="form-control flex-grow-1 my-1 mr-sm-2" id="SearchForm">
                    <button type="submit" class="flex-shrink-1 btn btn-primary my-1">Submit</button>
                  </form>
+
                 
              </div>
           </div>
        </div>
         <div class="row categorybg">
           <div class="col-md-3 mb-3">
-            <input
-              type="time"
-              id="appt"
-              name="appt"
-              min="09:00"
-              max="18:00"
-              required
-              class="form-control categorystart"
-            />
-            <small class="form-text categorytext">Start time</small>
-          </div>
-          <div class="col-md-3 mb-3">
-            <input
-              type="time"
-              id="appt"
-              name="appt"
-              min="09:00"
-              max="18:00"
-              required
-              class="form-control categorystart"
-            />
-            <small class="form-text categorytext">Finish time</small>
-          </div>
-          <div class="col-md-3 mb-3">
-            <div class="dropdown">
-              <button
-                class="btn btn-secondary dropdown-toggle categoryDB"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Categories
-              </button>
-              <ul class="dropdown-menu categoryDB">
-                <li>
-                  <a
-                    class="dropdown-item categorytext"
-                    onclick="selectCategory('Pop')"
-                    >Pop</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item categorytext"
-                    onclick="selectCategory('Rnb')"
-                    >Rnb</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item categorytext"
-                    onclick="selectCategory('Kpop')"
-                    >Kpop</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item categorytext"
-                    onclick="selectCategory('Rap')"
-                    >Rap</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item categorytext"
-                    onclick="selectCategory('Rock')"
-                    >Rock</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item categorytext"
-                    onclick="selectCategory('Jazz')"
-                    >Jazz</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item categorytext"
-                    onclick="selectCategory('Hip Hop')"
-                    >Hip Hop</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item categorytext"
-                    onclick="selectCategory('Heavy Metal')"
-                    >Heavy Metal</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item categorytext"
-                    onclick="selectCategory('Funk')"
-                    >Funk</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item categorytext"
-                    onclick="selectCategory('Reggae')"
-                    >Reggae</a
-                  >
-                </li>
-              </ul>
-            </div>
+            <h1 class="text-center mb-3">Search by Genre</h1>
+            <select class="form-select" aria-label="Default select example">
+              <option selected>--select genre--</option>
+              <option value="1">HipHop</option>
+              <option value="2">Pop</option>
+              <option value="3">Rock</option>
+              <option value="4">Metal</option>
+              <option value="5">Indie</option>
+              <option value="6">Folk</option>
+              <option value="7">EDM</option>
+            </select>
           </div>
           <div class="col-md-3 mb-3">
             <button

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms.fields import TextAreaField, SubmitField, StringField, PasswordField, DateTimeLocalField, RadioField, DecimalField, IntegerField
+from wtforms.fields import TextAreaField, SubmitField, StringField, PasswordField, DateTimeLocalField, RadioField, DecimalField, IntegerField, SelectField
 from wtforms.validators import InputRequired, Email, EqualTo, NumberRange
 from flask_wtf.file import FileRequired, FileField, FileAllowed
 from datetime import datetime
@@ -18,7 +18,7 @@ class EventForm(FlaskForm):
   start_time = DateTimeLocalField('Start Time', validators=[InputRequired()])
   end_time = DateTimeLocalField('End Time', validators=[InputRequired()])
   location = StringField('Event Location', validators=[InputRequired()])
-  genre = StringField('Genre', validators=[InputRequired()])
+  genre = SelectField('Genre', validators=[InputRequired()], choices = [(1,'HipHop'), (2,'Pop'), (3,'Rock'), (4,'Metal'), (5,'Indie'), (6,'Folk'), (7,'EDM')])
   price = DecimalField('Price', validators=[InputRequired(), NumberRange(min=0, max=1000)])
   numberoftickets = IntegerField('Number of Tickets', validators=[InputRequired(), NumberRange(min=1, max=50000)])
   submit = SubmitField("Create")
@@ -61,7 +61,7 @@ class UpdateForm(FlaskForm):
   start_time = DateTimeLocalField('Start Time', validators=[InputRequired()])
   end_time = DateTimeLocalField('End Time', validators=[InputRequired()])
   location = StringField('Event Location', validators=[InputRequired()])
-  genre = StringField('Genre', validators=[InputRequired()])
+  genre = SelectField('Genre', validators=[InputRequired()], choices = [(1,'HipHop'), (2,'Pop'), (3,'Rock'), (4,'Metal'), (5,'Indie'), (6,'Folk'), (7,'EDM')])
   price = DecimalField('Price', validators=[InputRequired(), NumberRange(min=0, max=1000)])
   numberoftickets = IntegerField('Number of Tickets', validators=[InputRequired(), NumberRange(min=1, max=50000)])
   submit = SubmitField("Update")

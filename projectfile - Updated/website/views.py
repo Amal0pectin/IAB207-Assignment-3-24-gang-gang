@@ -15,10 +15,6 @@ def search():
         query = "%" + request.args['search'] + "%"
         events = db.session.scalars(db.select(Event).where(Event.name.like(query)))
         return render_template('index.html', events=events)
-    #genre search if we get it to work:
-    #elif print(request.args['search']):
-        #query = "%" + request.args['search'] + "%"
-        #events = db.session.scalars(db.select(Event).where(Event.genre.like(query)))
-        #return render_template('index.html', events=events)
     else:
         return redirect(url_for('main.index'))
+
